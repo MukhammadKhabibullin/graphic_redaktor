@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+using namespace std;
+
 struct Button
 {
  int x;
@@ -107,13 +109,67 @@ int get_h(string adress)
     return h;
 }
 
+
+        //Диалог открытия /сохранения файла
+     string runFileDialog(bool isSave)
+     {
+         string fileName = "";
+
+         OPENFILENAME ofn;     //common dialog box structure
+         TCHAR szFile[260] = {0};     //if using TCHAR macros
+
+         //Initailize OPENFILNAME
+         ZeroMemory(&ofn, sizeof(ofn));
+         ofn.lStructSize = sizeof(ofn);
+         ofn.hwndOwner = txWindow();
+         ofn.lpstrFile = szFile;
+         ofn.nMaxFile = sizeof(szFile);
+         ofn.lpstrFilter = ("Text\0*.TXT\0");
+         ofn.nFilterIndex = 1;
+         ofn.lpstrFileTitle = NULL;
+         ofn.nMaxFileTitle = 0;
+         ofn.lpstrInitialDir = NULL;
+         ofn.Flags - OFN_PATHMUSTEXIST | OFN_PATHMUSTEXIST;
+
+
+         if (isSave)
+         {
+             if (GetSaveFileName(&ofn)== TRUE)
+             {
+                 fileName = ofn.lpstrFile;
+
+                 if (fileName.find(".txt") > 1000)
+                 {
+                     fileName = fileName + ".txt" ;
+
+
+                 }
+             }
+        }
+
+      else
+     {
+         if (GetOpenFileName(&ofn) == TRUE)
+        {
+           fileName = ofn.lpstrFile;
+        }
+
+      }
+   return fileName;
+}
+
+    const int COUNT_BTN = 7;
+    const int BTN_SAVE = COUNT_BTN - 2;
+    const int BTN_LOAD = COUNT_BTN - 1;
+
+
 int main()
 {
+    setlocale(LC_ALL,"Russian");
     txCreateWindow (1200,800);
     txDisableAutoPause();
     txTextCursor(false);
     int COUNT_PICTURES = 0;
-    int COUNT_BTN = 5;
     int nCentralPic = 0;
 
     int vybor = -1;
@@ -121,26 +177,27 @@ int main()
     char str[100];
 
 
-    //����� ������
+    //масив кнопок
     Button btn [COUNT_BTN];
-    btn[0] = {50,  50, "������","������"};
-    btn[1] = {230, 50, "�������","�������"};
-    btn[2] = {410, 50, "����", "����"};
-    btn[3] = {590, 50, "����","����"};
-    btn[4] = {770, 50, "�����","�����"};
+    btn[0] = {50,  50, "Диваны","Диваны"};
+    btn[1] = {230, 50, "Кровать","Кровать"};
+    btn[2] = {410, 50, "Стол", "Стол"};
+    btn[3] = {590, 50, "Шкаф","Шкаф"};
+    btn[4] = {770, 50, "Палас","Палас"};
+    btn[5] = {950, 50, "Сохранить"};
+    btn[6] = {1130, 50, "Загрузить"};
 
-
-    //����� �������� ����
+    //масив картинок меню
     Pictures menuPictures[1000];
 
     Pictures centralPictures[1000];
 
 
-    COUNT_PICTURES = readFromDir("Pictures/������/", menuPictures, COUNT_PICTURES);
-    COUNT_PICTURES = readFromDir("Pictures/�������/", menuPictures, COUNT_PICTURES);
-    COUNT_PICTURES = readFromDir("Pictures/����/", menuPictures, COUNT_PICTURES);
-    COUNT_PICTURES = readFromDir("Pictures/�����/", menuPictures, COUNT_PICTURES);
-    COUNT_PICTURES = readFromDir("Pictures/����/", menuPictures, COUNT_PICTURES);
+    COUNT_PICTURES = readFromDir("pictures/Диваны/", menuPictures, COUNT_PICTURES);
+    COUNT_PICTURES = readFromDir("pictures/Кровать/", menuPictures, COUNT_PICTURES);
+    COUNT_PICTURES = readFromDir("pictures/Шкаф/", menuPictures, COUNT_PICTURES);
+    COUNT_PICTURES = readFromDir("pictures/Палас/", menuPictures, COUNT_PICTURES);
+    COUNT_PICTURES = readFromDir("pictures/Стол/", menuPictures, COUNT_PICTURES);
 
 
 
@@ -169,10 +226,12 @@ int main()
     {
         txBegin();
         txSetColor (TX_WHITE);
-        txSetFillColor (TX_WHITE);
+        txSetFillColor (TX_BLACK);
+
         txClear();
 
-        txBitBlt(txDC(), 0, 0, 1200, 800, txLoadImage("��������/���/���.bmp"));
+        txBitBlt(txDC(), 0, 0, 1200, 800, txLoadImage("pictures/fon/fon.bmp"));
+        txRectangle(200, 100, 1150, 750);
 
         for(int nk=0; nk<COUNT_BTN; nk++)
         {
@@ -189,7 +248,7 @@ int main()
            drawPictures(centralPictures[npic]);
        }
 
-        //��������� ����-�������� �� ��������� ������
+        //видимость меню-картинок по категории кнопки
         for(int nknopka=0; nknopka<COUNT_BTN; nknopka++)
         {
             if(click(btn[nknopka]))
@@ -224,6 +283,7 @@ int main()
 
                    centralPictures[nCentralPic] = {250,
                                               200,
+                                              menuPictures[npic].adress,
                                               menuPictures[npic].image,
                                               menuPictures[npic].w,
                                               menuPictures[npic].h,
@@ -237,8 +297,8 @@ int main()
               }
        }
 
-        //����� ����������� ��������
-        for(int npic=0; npic < COUNT_PICTURES; npic++)
+        //выбор центральной картинки
+        for(int npic=0; npic < nCentralPic; npic++)
        {
            if(txMouseButtons() == 1 &&
               centralPictures[npic].visible &&
@@ -253,10 +313,10 @@ int main()
               }
 
        }
-       sprintf(str,"����� = %d nCentralPic = %d", vybor, nCentralPic);
+       sprintf(str,"выбор= %d nCentralPic= %d COUNT_PICTURES= %d", vybor, nCentralPic, COUNT_PICTURES);
        txTextOut(0,0, str);
 
-   //��������� ����������� ��������
+   //выбранной центральной картинки
    if(vybor>=0)
    {
       if(GetAsyncKeyState(VK_RIGHT)) centralPictures[vybor].x += 3;
@@ -291,9 +351,69 @@ int main()
     }
 
 
+          //Ñîõðàíèòü
+        if(click(btn[BTN_SAVE]))
+        {
+            string fileName = runFileDialog(true);
+            if (fileName != "")
+            {
+                ofstream fout; //Завели под файл переменную
+                fout.open(fileName); //Открыли файл для записи
+                for (int npic = 0; npic < COUNT_PICTURES; npic++)
+                {
+                    if (centralPictures[npic].visible)
+                    {
+                        fout << centralPictures[npic].x << endl; //что то записали
+                        fout << centralPictures[npic].y << endl;
+                        fout << centralPictures[npic].adress << endl;
+                    }
+                }
+                fout.close();            //Закрыли файл
+
+                txMessageBox("Сохранено", "Спасибо", MB_ICONINFORMATION);
+            }
+
+        }
+
+
+        //Загрузка
+        if (click(btn[BTN_LOAD]))
+        {
+            string fileName = runFileDialog(false);
+            if (fileName != "")
+            {
+                for (int npic = 0; npic < COUNT_PICTURES; npic++)
+                {
+                    centralPictures[npic].visible = false;
+                }
+
+                char buff[50];              // Сюда будим считывать текст
+                ifstream fin(fileName);      //открыли файл для чтения
+                {
+                    fin.getline(buff, 50); // считали строку из файла
+                    int x = atoi(buff);
+                    fin.getline(buff, 50); // считали строку из файла
+                    int y = atoi(buff);
+                    fin.getline(buff, 50); // считали строку из файла
+                    string adress = (buff);
+
+                    for (int npic = 0; npic < COUNT_PICTURES; npic++)
+                    {
+                        if (centralPictures[npic].adress == adress)
+                        {
+                            centralPictures[npic].x = x;
+                            centralPictures[npic].y = y;
+                            centralPictures[npic].visible = true;
+                        }
+                    }
+                }
+                fin.close();                //Закрыли файл
+            }
+        }
 
         txEnd();
         txSleep(50);
+
 }
 
 
@@ -301,21 +421,15 @@ int main()
        {
            txDeleteDC(menuPictures[npic].image);
        }
+
+    for(int npic=0; npic < nCentralPic; npic++)
+       {
+           txDeleteDC(centralPictures[npic].image);
+       }
+
+
 return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

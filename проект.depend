@@ -1,4 +1,10 @@
 # depslib dependency file v1.0
-1668177727 source:d:\я\проект\main.cpp
+1671634363 source:d:\я\проект\main.cpp
 	"TXLib.h"
+	<iostream>
+	<fstream>
+	"dirent.h"
+	<conio.h>
+	<stdio.h>
+	<stdlib.h>
 

@@ -1,0 +1,15 @@
+592
+271
+pictures/Диваны/диван2.bmp
+593
+340
+pictures/Палас/палас3.bmp
+446
+352
+pictures/Кровать/bed2.bmp
+364
+374
+pictures/Шкаф/Шкаф1.bmp
+596
+554
+pictures/Стол/Стол1.bmp

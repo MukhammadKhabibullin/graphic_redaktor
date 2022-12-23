@@ -361,7 +361,7 @@ int main()
             {
                 ofstream fout; //Завели под файл переменную
                 fout.open(fileName); //Открыли файл для записи
-                for (int npic = 0; npic < nCentralPic; npic++)
+                for (int npic = 0; npic < COUNT_PICTURES; npic++)
                 {
                     if (centralPictures[npic].visible)
                     {
@@ -391,7 +391,6 @@ int main()
 
                 char buff[50];              // Сюда будим считывать текст
                 ifstream fin(fileName);      //открыли файл для чтения
-                while (fin.good())
                 {
                     fin.getline(buff, 50); // считали строку из файла
                     int x = atoi(buff);
@@ -406,7 +405,7 @@ int main()
                         {
 
                             centralPictures[nCentralPic] =   {x,
-                                                              y,
+                                                              н,
                                                               menuPictures[npic].adress,
                                                               menuPictures[npic].image,
                                                               menuPictures[npic].w,

@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>проект build log</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<body>
+<tt>
+Build started on: <u>23-12-2022 at 19:17.39</u><br />
+Build ended on: <u>23-12-2022 at 19:18.00</u><p />
+<b>-------------- Build: Debug in проект (compiler: GNU GCC Compiler)---------------</b><br />
+g++.exe -Wall -fexceptions  -g     -c D:\я\проект\main.cpp -o obj\Debug\main.o<br />
+D:\я\проект\main.cpp: In function 'void drawButton(Button)':<br />
+<font color="#0000ff">D:\я\проект\main.cpp:20:6: warning: no previous declaration for 'void drawButton(Button)' [-Wmissing-declarations]</font><br />
+ void drawButton(Button btn)<br />
+      ^<br />
+D:\я\проект\main.cpp: In function 'bool click(Button)':<br />
+<font color="#0000ff">D:\я\проект\main.cpp:34:6: warning: no previous declaration for 'bool click(Button)' [-Wmissing-declarations]</font><br />
+ bool click(Button btn)<br />
+      ^<br />
+D:\я\проект\main.cpp: In function 'void drawPictures(Pictures)':<br />
+<font color="#0000ff">D:\я\проект\main.cpp:57:6: warning: no previous declaration for 'void drawPictures(Pictures)' [-Wmissing-declarations]</font><br />
+ void drawPictures(Pictures pct)<br />
+      ^<br />
+D:\я\проект\main.cpp: In function 'int readFromDir(std::string, Pictures*, int)':<br />
+<font color="#0000ff">D:\я\проект\main.cpp:65:5: warning: no previous declaration for 'int readFromDir(std::string, Pictures*, int)' [-Wmissing-declarations]</font><br />
+ int readFromDir(string adress, Pictures menuPicture[], int COUNT_PICTURES)<br />
+     ^<br />
+D:\я\проект\main.cpp: In function 'int get_w(std::string)':<br />
+<font color="#0000ff">D:\я\проект\main.cpp:88:5: warning: no previous declaration for 'int get_w(std::string)' [-Wmissing-declarations]</font><br />
+ int get_w(string adress)<br />
+     ^<br />
+D:\я\проект\main.cpp: In function 'int get_h(std::string)':<br />
+<font color="#0000ff">D:\я\проект\main.cpp:100:5: warning: no previous declaration for 'int get_h(std::string)' [-Wmissing-declarations]</font><br />
+ int get_h(string adress)<br />
+     ^<br />
+D:\я\проект\main.cpp: In function 'std::string runFileDialog(bool)':<br />
+<font color="#0000ff">D:\я\проект\main.cpp:114:13: warning: no previous declaration for 'std::string runFileDialog(bool)' [-Wmissing-declarations]</font><br />
+      string runFileDialog(bool isSave)<br />
+             ^<br />
+<font color="#0000ff">D:\я\проект\main.cpp:132:20: warning: suggest parentheses around arithmetic in operand of '|' [-Wparentheses]</font><br />
+          ofn.Flags - OFN_PATHMUSTEXIST | OFN_PATHMUSTEXIST;<br />
+                    ^<br />
+<font color="#0000ff">D:\я\проект\main.cpp:132:40: warning: statement has no effect [-Wunused-value]</font><br />
+          ofn.Flags - OFN_PATHMUSTEXIST | OFN_PATHMUSTEXIST;<br />
+                                        ^<br />
+D:\я\проект\main.cpp: In constructor 'Button::Button()':<br />
+<font color="#0000ff">D:\я\проект\main.cpp:11:8: warning: 'Button::x' should be initialized in the member initialization list [-Weffc++]</font><br />
+ struct Button<br />
+        ^<br />
+<font color="#0000ff">D:\я\проект\main.cpp:11:8: warning: 'Button::y' should be initialized in the member initialization list [-Weffc++]</font><br />
+<font color="#0000ff">D:\я\проект\main.cpp:11:8: warning: 'Button::text' should be initialized in the member initialization list [-Weffc++]</font><br />
+<font color="#0000ff">D:\я\проект\main.cpp:11:8: warning: 'Button::category' should be initialized in the member initialization list [-Weffc++]</font><br />
+D:\я\проект\main.cpp: In function 'int main()':<br />
+D:\я\проект\main.cpp:181:26: note: synthesized method 'Button::Button()' first required here <br />
+     Button btn [COUNT_BTN];<br />
+                          ^<br />
+D:\я\проект\main.cpp: In constructor 'Pictures::Pictures()':<br />
+<font color="#0000ff">D:\я\проект\main.cpp:43:8: warning: 'Pictures::x' should be initialized in the member initialization list [-Weffc++]</font><br />
+ struct Pictures<br />
+        ^<br />
+<font color="#0000ff">D:\я\проект\main.cpp:43:8: warning: 'Pictures::y' should be initialized in the member initialization list [-Weffc++]</font><br />
+<font color="#0000ff">D:\я\проект\main.cpp:43:8: warning: 'Pictures::adress' should be initialized in the member initialization list [-Weffc++]</font><br />
+<font color="#0000ff">D:\я\проект\main.cpp:43:8: warning: 'Pictures::image' should be initialized in the member initialization list [-Weffc++]</font><br />
+<font color="#0000ff">D:\я\проект\main.cpp:43:8: warning: 'Pictures::w' should be initialized in the member initialization list [-Weffc++]</font><br />
+<font color="#0000ff">D:\я\проект\main.cpp:43:8: warning: 'Pictures::h' should be initialized in the member initialization list [-Weffc++]</font><br />
+<font color="#0000ff">D:\я\проект\main.cpp:43:8: warning: 'Pictures::w_scr' should be initialized in the member initialization list [-Weffc++]</font><br />
+<font color="#0000ff">D:\я\проект\main.cpp:43:8: warning: 'Pictures::h_scr' should be initialized in the member initialization list [-Weffc++]</font><br />
+<font color="#0000ff">D:\я\проект\main.cpp:43:8: warning: 'Pictures::category' should be initialized in the member initialization list [-Weffc++]</font><br />
+<font color="#0000ff">D:\я\проект\main.cpp:43:8: warning: 'Pictures::visible' should be initialized in the member initialization list [-Weffc++]</font><br />
+D:\я\проект\main.cpp: In function 'int main()':<br />
+D:\я\проект\main.cpp:191:30: note: synthesized method 'Pictures::Pictures()' first required here <br />
+     Pictures menuPictures[100];<br />
+                              ^<br />
+<font color="#0000ff">D:\я\проект\main.cpp:335:50: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]</font><br />
+           centralPictures [vybor].x = txMouseX() - centralPictures[vybor].w/2;<br />
+                                                  ^<br />
+<font color="#0000ff">D:\я\проект\main.cpp:336:50: warning: conversion to 'int' from 'double' may alter its value [-Wconversion]</font><br />
+           centralPictures [vybor].y = txMouseY() - centralPictures[vybor].h/2;<br />
+                                                  ^<br />
+g++.exe  -o bin\Debug\проект.exe obj\Debug\main.o     -mwindows<br />
+Output size is 2,21 MB<br />
+<font color="#0000ff">Process terminated with status 0 (0 minutes, 20 seconds)</font><br />
+<font color="#0000ff">0 errors, 25 warnings (0 minutes, 20 seconds)</font><br />
+</tt>
+</body>
+</html>
